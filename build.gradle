@@ -3,9 +3,14 @@ buildscript {
         mavenCentral()
         maven { name = "forge"; url = "https://files.minecraftforge.net/maven" }
         maven { name = "sonatype"; url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url = "https://jitpack.io" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        // Upstream ForgeGradle 1.2 is hardcoded to a Mojang S3 endpoint that
+        // was retired in 2022, which breaks setupDecompWorkspace/getAssetsIndex
+        // for everyone (not specific to this project). The GTNewHorizons fork
+        // patches that endpoint and is a drop-in replacement.
+        classpath 'com.github.GTNewHorizons:ForgeGradle:1.2.11'
     }
 }
 
